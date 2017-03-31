@@ -1,6 +1,7 @@
 
-class Foo {
-  constructor(bar) {
+export class Foo {
+  constructor(config, bar) {
+    this.config = config;
     this.bar = bar;
     this.initialized = false;
   }
@@ -10,6 +11,6 @@ export default function (register) {
   register(Foo, {
     singleton: true,
     type: 'constructor',
-    require: ['services/bar'],
+    require: ['services/config', 'services/bar'],
   });
 }

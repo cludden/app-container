@@ -1,6 +1,7 @@
 {
   "rules": {
     "func-names": "off",
+    "no-console": "off",
     "prefer-arrow-callback": "off"
   }
 }
