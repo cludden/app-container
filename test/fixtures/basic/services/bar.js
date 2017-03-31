@@ -1,7 +1,7 @@
 
 
 const bar = {
-  bar: 'baz',
+  baz: 'bar',
 };
 
 export default function (register) {

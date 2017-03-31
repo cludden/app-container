@@ -1,6 +1,6 @@
 
 
-export function factory({ other, bar }) {
+export function factory() {
   return new Promise((resolve) => {
     setTimeout(function () {
       resolve({ message: 'Hello World!' });
@@ -9,10 +9,5 @@ export function factory({ other, bar }) {
 }
 
 export default function (register) {
-  register(factory, {
-    require: {
-      other: 'services/other',
-      bar: 'services/bar',
-    },
-  });
+  register(factory);
 }

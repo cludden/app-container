@@ -1,6 +1,7 @@
 
 import Container from '../../../lib/container';
 
-const container = new Container('{services,controllers}/**/*.js', { cwd: __dirname });
+const container = new Container();
+container.glob('{controllers,models,services}/**/*.js', { dir: __dirname });
 
 export default container;

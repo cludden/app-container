@@ -1,8 +1,8 @@
 {
-  "name": "node-starter-kit",
+  "name": "app-container",
   "version": "0.0.0",
-  "description": "",
-  "main": "index.js",
+  "description": "asynchronous IoC container for node.js applications",
+  "main": "./dist",
   "scripts": {
     "build": "rm -rf dist/* && babel lib -d dist",
     "coverage": "./node_modules/.bin/babel-node ./node_modules/.bin/babel-istanbul cover ./node_modules/.bin/_mocha test/**/*.test.js",
@@ -13,19 +13,24 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/cludden/node-starter-kit.git"
+    "url": "git+https://github.com/cludden/app-container.git"
   },
   "keywords": [
-    "node",
-    "starter",
-    "kit"
+    "ioc",
+    "async",
+    "di",
+    "dependency injection",
+    "dependency-injection",
+    "container",
+    "ioc-container",
+    "IoC"
   ],
   "author": "chris ludden",
-  "license": "UNLICENSED",
+  "license": "MIT",
   "bugs": {
-    "url": "https://github.com/cludden/node-starter-kit/issues"
+    "url": "https://github.com/cludden/app-container/issues"
   },
-  "homepage": "https://github.com/cludden/node-starter-kit#readme",
+  "homepage": "https://github.com/cludden/app-container#readme",
   "devDependencies": {
     "babel-cli": "^6.23.0",
     "babel-core": "^6.23.1",
@@ -39,6 +44,8 @@
     "eslint-plugin-import": "^2.2.0",
     "istanbul": "^0.4.5",
     "mocha": "^3.2.0",
+    "sinon": "^2.1.0",
+    "sinon-chai": "^2.9.0",
     "standard-version": "^4.0.0"
   },
   "dependencies": {
