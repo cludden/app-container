@@ -1,0 +1,12 @@
+version: '2'
+services:
+  node-starter-kit:
+    build:
+      context: .
+    command: npm run coverage
+    environment:
+      NODE_ENV: test
+    links:
+    volumes:
+     - .:/home/app/src
+     - /home/app/src/node_modules

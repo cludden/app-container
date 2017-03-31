@@ -1,0 +1,50 @@
+{
+  "name": "node-starter-kit",
+  "version": "0.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "build": "rm -rf dist/* && babel lib -d dist",
+    "coverage": "./node_modules/.bin/babel-node ./node_modules/.bin/babel-istanbul cover ./node_modules/.bin/_mocha test/**/*.test.js",
+    "postversion": "npm run build",
+    "release": "npm run build && standard-version",
+    "start": "node .",
+    "test": "mocha --recursive --compilers js:babel-register test/**/*.test.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/cludden/node-starter-kit.git"
+  },
+  "keywords": [
+    "node",
+    "starter",
+    "kit"
+  ],
+  "author": "chris ludden",
+  "license": "UNLICENSED",
+  "bugs": {
+    "url": "https://github.com/cludden/node-starter-kit/issues"
+  },
+  "homepage": "https://github.com/cludden/node-starter-kit#readme",
+  "devDependencies": {
+    "babel-cli": "^6.23.0",
+    "babel-core": "^6.23.1",
+    "babel-istanbul": "^0.12.2",
+    "babel-plugin-add-module-exports": "^0.2.1",
+    "babel-plugin-transform-object-rest-spread": "^6.23.0",
+    "babel-preset-env": "^1.2.1",
+    "chai": "^3.5.0",
+    "eslint": "^3.17.1",
+    "eslint-config-airbnb-base": "^11.1.1",
+    "eslint-plugin-import": "^2.2.0",
+    "istanbul": "^0.4.5",
+    "mocha": "^3.2.0",
+    "standard-version": "^4.0.0"
+  },
+  "dependencies": {
+    "bluebird": "^3.5.0",
+    "dependency-graph": "^0.5.0",
+    "glob": "^7.1.1",
+    "lodash": "^4.17.4"
+  }
+}
