@@ -1,5 +1,8 @@
 # app-container
-Yet another IoC container for node applications, built from the ground up with async components in mind.
+Yet another IoC container for node applications with a few specific goals:
+- support for asynchronous modules
+- flexible declaration & dependency syntax
+- support for initialization hooks
 
 ## Installing
 ```shell
@@ -7,83 +10,13 @@ $ npm install --save app-container
 ```
 
 ## Getting Started
-config.js
+In order to utilize the container, we first need a way for modules to declare some basic information about themselves (what are their dependencies? what are they called? do they require initialization? should they be treated as singletons?). Below we declare a simple module `fooService` that has a dependency on `barService`. There are two distinct styles of declaring modules to the container; an example of each is show below.
+
+**function**
 ```javascript
-export function config() {
-  return new Promise((resolve) => {
-    setTimeout(() => {
-      resolve({ n: 4 });
-    }, 10);
-  });
-}
+// in foo.js
 
-export default function(register) {
-  register(config);
-}
-```
-
-bar.js
-```javascript
-export class Bar {
-  constructor(config) {
-    this.n = config.n;
-  }
-
-  add(n) {
-    this.n += n;
-    return this.n;
-  }
-}
-
-export default function(register) {
-  register(Bar, {
-    require: 'config',
-    type: 'constructor',
-  });
-}
-```
-
-foo.js
-```javascript
-export function fooFactory(config, bar) {
-  let base;
-
-  function add2toBasePlusBar() {
-    return bar.add(2);
-  }
-
-  function initialize() {
-    return new Promise((resolve) => {
-      setTimeout(() => {
-        base = config.n;
-        resolve();
-      });
-    });
-  }
-
-  return {
-    add2toBasePlusBar,
-    initialize,
-  };
-}
-
-export default function(register) {
-  register(fooFactory, { require: ['config', 'bar'] });
-}
-```
-
-container.js
-```javascript
-import Container from 'app-container';
-
-// create a new container and register your components
-const container = new Container();
-container.glob('{bar,config,foo}.js', { dir: __dirname });
-
-container.load('foo')
-.then((foo) => {
-  foo.add2toBasePlusBar();
-});
+export 
 ```
 
 ## Testing
