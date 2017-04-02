@@ -10,7 +10,7 @@ describe('[basic]', function () {
     const createContainer = () => {
       const container = new Container();
       container.glob('{a,b,c}.js', {
-        cwd: path.join(__dirname, '../fixtures/circular'),
+        dir: path.join(__dirname, '../fixtures/circular'),
       });
       return container;
     };
