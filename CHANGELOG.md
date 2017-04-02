@@ -2,6 +2,22 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+<a name="0.2.0"></a>
+# [0.2.0](https://github.com/cludden/app-container/compare/v0.1.1...v0.2.0) (2017-04-02)
+
+
+### Bug Fixes
+
+* updates README with simple example ([0150770](https://github.com/cludden/app-container/commit/0150770))
+
+
+### Features
+
+* adds support for namespaced approach ([c9693ca](https://github.com/cludden/app-container/commit/c9693ca))
+* adds support for namespaced approach ([2cbb3eb](https://github.com/cludden/app-container/commit/2cbb3eb))
+
+
+
 <a name="0.1.1"></a>
 ## [0.1.1](https://github.com/cludden/app-container/compare/v0.1.0...v0.1.1) (2017-03-31)
 
