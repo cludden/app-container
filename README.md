@@ -10,13 +10,15 @@ $ npm install --save app-container
 ```
 
 ## Getting Started
-In order to utilize the container, we first need a way for modules to declare some basic information about themselves (what are their dependencies? what are they called? do they require initialization? should they be treated as singletons?). Below we declare a simple module `fooService` that has a dependency on `barService`. There are two distinct styles of declaring modules to the container; an example of each is show below.
-
-**function**
+Create a new container.
 ```javascript
-// in foo.js
+import Container from 'app-container';
 
-export 
+// create a new container
+const container = new Container()
+
+// define locations for the container to inspect
+container.glob('**/*.js', { dir: __dirname });
 ```
 
 ## Testing
