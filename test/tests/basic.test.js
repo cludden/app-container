@@ -1,14 +1,19 @@
 import chai, { expect } from 'chai';
 import { afterEach, before, describe, it } from 'mocha';
+import path from 'path';
 import sinon from 'sinon';
 import sinonchai from 'sinon-chai';
 
-import container from '../fixtures/basic';
+import Container from '../../lib';
 
 chai.use(sinonchai);
 
 describe('[basic]', function () {
   before(function () {
+    this.container = new Container();
+    this.container.glob('**/*.js', {
+      dir: path.join(__dirname, '../fixtures/basic'),
+    });
     this.sandbox = sinon.sandbox.create();
   });
 
@@ -17,7 +22,7 @@ describe('[basic]', function () {
   });
 
   it('should load {string}', function () {
-    return container.load('services/foo')
+    return this.container.load('services/foo')
     .then((foo) => {
       expect(foo).to.have.property('bar');
       expect(foo.bar).to.have.property('baz', 'bar');
@@ -28,7 +33,7 @@ describe('[basic]', function () {
   });
 
   it('should load {multiple}', function () {
-    return container.load('controllers/a', 'controllers/b')
+    return this.container.load('controllers/a', 'controllers/b')
     .spread((a, b) => {
       expect(a).to.have.property('foo');
       expect(b).to.have.property('foo');
@@ -40,7 +45,7 @@ describe('[basic]', function () {
   });
 
   it('should load {object}', function () {
-    return container.load({
+    return this.container.load({
       foo: 'services/foo',
       models: {
         group: 'models/group',
