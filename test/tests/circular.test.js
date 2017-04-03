@@ -6,7 +6,6 @@ import Container from '../../lib/container';
 
 describe('[basic]', function () {
   it('should load {string}', function () {
-    console.log(path.join(__dirname, '../fixtures/circular'));
     const createContainer = () => {
       const container = new Container();
       container.glob('{a,b,c}.js', {
