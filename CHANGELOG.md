@@ -2,6 +2,16 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+<a name="0.3.1"></a>
+## [0.3.1](https://github.com/cludden/app-container/compare/v0.3.0...v0.3.1) (2017-04-03)
+
+
+### Bug Fixes
+
+* fix issue with nested require declaration ([9d69206](https://github.com/cludden/app-container/commit/9d69206))
+
+
+
 <a name="0.3.0"></a>
 # [0.3.0](https://github.com/cludden/app-container/compare/v0.2.0...v0.3.0) (2017-04-03)
 
