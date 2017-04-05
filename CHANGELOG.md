@@ -2,6 +2,16 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+<a name="0.4.2"></a>
+## [0.4.2](https://github.com/cludden/app-container/compare/v0.4.1...v0.4.2) (2017-04-05)
+
+
+### Bug Fixes
+
+* remove last remaining remnants of legacy declaration style ([a71eb48](https://github.com/cludden/app-container/commit/a71eb48))
+
+
+
 <a name="0.4.1"></a>
 ## [0.4.1](https://github.com/cludden/app-container/compare/v0.4.0...v0.4.1) (2017-04-05)
 
