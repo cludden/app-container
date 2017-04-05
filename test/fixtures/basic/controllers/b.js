@@ -1,12 +1,11 @@
 
-
-export default function (register) {
-  register(function ({ config, foo }) {
-    return { config, foo };
-  }, {
-    require: {
-      config: 'services/config',
-      foo: 'services/foo',
-    },
-  });
+export default function ({ config, foo }) {
+  return { config, foo };
 }
+
+export const inject = {
+  require: {
+    config: 'services/config',
+    foo: 'services/foo',
+  },
+};

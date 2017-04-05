@@ -1,6 +1,6 @@
 import Bluebird from 'bluebird';
 
-export class Group {
+export default class Group {
   constructor({ userModel }) {
     this.userModel = userModel;
     this.models = [];
@@ -14,10 +14,8 @@ export class Group {
   }
 }
 
-export default function (register) {
-  register(Group, {
-    require: { userModel: 'models/user' },
-    singleton: true,
-    type: 'constructor',
-  });
-}
+export const inject = {
+  require: { userModel: 'models/user' },
+  singleton: true,
+  type: 'constructor',
+};

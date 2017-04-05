@@ -1,9 +1,7 @@
 
 
-const bar = {
+export default {
   baz: 'bar',
 };
 
-export default function (register) {
-  register(bar);
-}
+export const inject = { };

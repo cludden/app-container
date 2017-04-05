@@ -1,6 +1,6 @@
 
 
-export function factory() {
+export default function factory() {
   return new Promise((resolve) => {
     setTimeout(function () {
       resolve({ message: 'Hello World!' });
@@ -8,6 +8,4 @@ export function factory() {
   });
 }
 
-export default function (register) {
-  register(factory);
-}
+export const inject = { };

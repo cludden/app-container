@@ -7,12 +7,10 @@
           "node": "current"
         }
       }
-    ],
-    "flow"
+    ]
   ],
   "plugins": [
     "add-module-exports",
-    "transform-object-rest-spread",
-    "flow"
+    "transform-object-rest-spread"
   ]
 }
