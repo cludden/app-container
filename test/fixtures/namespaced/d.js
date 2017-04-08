@@ -9,6 +9,4 @@ export default function d({ b }) {
   };
 }
 
-export function inject(register) {
-  register(d, { require: { b: 'b' } });
-}
+export const inject = { require: { b: 'b' } };

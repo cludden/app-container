@@ -4,10 +4,10 @@ import path from 'path';
 
 import Container from '../../lib/container';
 
-describe('[basic]', function () {
-  it('should load {string}', function () {
+describe('[circular]', function () {
+  it('should error on circular dependencies', function () {
     const createContainer = () => {
-      const container = new Container();
+      const container = new Container({ namespace: 'ioc' });
       container.glob('{a,b,c}.js', {
         dir: path.join(__dirname, '../fixtures/circular'),
       });

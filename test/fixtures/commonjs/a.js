@@ -4,10 +4,8 @@ module.exports = {
     return this.b.bar() + n;
   },
 
-  ioc(register) {
-    register(this, {
-      name: 'aService',
-      require: { b: 'bService' },
-    });
+  ioc: {
+    name: 'aService',
+    require: { b: 'bService' },
   },
 };

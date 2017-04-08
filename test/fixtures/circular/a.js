@@ -1,14 +1,12 @@
 
-export class A {
+export default class A {
   constructor(b) {
     this.b = b;
   }
 }
 
-export default function (register) {
-  register(A, {
-    require: 'b',
-    singleton: true,
-    type: 'constructor',
-  });
-}
+export const ioc = {
+  require: 'b',
+  singleton: true,
+  type: 'constructor',
+};

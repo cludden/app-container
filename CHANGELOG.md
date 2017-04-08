@@ -2,6 +2,56 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+<a name="0.4.2"></a>
+## [0.4.2](https://github.com/cludden/app-container/compare/v0.4.1...v0.4.2) (2017-04-05)
+
+
+### Bug Fixes
+
+* remove last remaining remnants of legacy declaration style ([a71eb48](https://github.com/cludden/app-container/commit/a71eb48))
+
+
+
+<a name="0.4.1"></a>
+## [0.4.1](https://github.com/cludden/app-container/compare/v0.4.0...v0.4.1) (2017-04-05)
+
+
+### Bug Fixes
+
+* ignore modules that lack a namespace definition ([280a9bc](https://github.com/cludden/app-container/commit/280a9bc))
+
+
+
+<a name="0.4.0"></a>
+# [0.4.0](https://github.com/cludden/app-container/compare/v0.3.2...v0.4.0) (2017-04-05)
+
+
+### Features
+
+* adds error notification when a component fails to register, removes support for register function ([01d2db3](https://github.com/cludden/app-container/commit/01d2db3))
+
+
+
+<a name="0.3.2"></a>
+## [0.3.2](https://github.com/cludden/app-container/compare/v0.3.1...v0.3.2) (2017-04-03)
+
+
+### Bug Fixes
+
+* fix issue with error stacktraces ([bae285b](https://github.com/cludden/app-container/commit/bae285b))
+
+
+
+<a name="0.3.1"></a>
+## [0.3.1](https://github.com/cludden/app-container/compare/v0.3.0...v0.3.1) (2017-04-03)
+
+
+### Bug Fixes
+
+* fix issue with nested require declaration ([9d69206](https://github.com/cludden/app-container/commit/9d69206))
+
+
+
 <a name="0.3.0"></a>
 # [0.3.0](https://github.com/cludden/app-container/compare/v0.2.0...v0.3.0) (2017-04-03)
 

@@ -1,5 +1,5 @@
 
-export class User {
+export default class User {
   constructor() {
     this.models = [];
   }
@@ -13,9 +13,7 @@ export class User {
   }
 }
 
-export default function (register) {
-  register(User, {
-    singleton: true,
-    type: 'constructor',
-  });
-}
+export const inject = {
+  singleton: true,
+  type: 'constructor',
+};

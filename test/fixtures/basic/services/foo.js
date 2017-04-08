@@ -1,5 +1,5 @@
 
-export class Foo {
+export default class Foo {
   constructor(config, bar) {
     this.config = config;
     this.bar = bar;
@@ -16,11 +16,9 @@ export class Foo {
   }
 }
 
-export default function (register) {
-  register(Foo, {
-    singleton: true,
-    init: 'initialize',
-    type: 'constructor',
-    require: ['services/config', 'services/bar'],
-  });
-}
+export const inject = {
+  singleton: true,
+  init: 'initialize',
+  type: 'constructor',
+  require: ['services/config', 'services/bar'],
+};
