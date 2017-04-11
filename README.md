@@ -242,6 +242,8 @@ export const inject = {
 
 
 ## Module Properties
+A module declaration can declare any combination of the following properties.
+
 ### init (String)
 The name of a method/function to call to initialize the module instance after it's been created.
 
@@ -326,6 +328,14 @@ container.load('all!^services')
 
 container.load('any!^services')
 .spread(([foo]))
+```
+
+
+
+## Debugging
+To enable debugging, you can use the `DEBUG` environment variable.
+```shell
+$ export DEBUG=app-container*
 ```
 
 
