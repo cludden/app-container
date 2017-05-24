@@ -2,6 +2,17 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+<a name="0.4.4"></a>
+## [0.4.4](https://github.com/cludden/app-container/compare/v0.4.3...v0.4.4) (2017-05-24)
+
+
+### Bug Fixes
+
+* adds registration error to debug info for clarity ([8735f10](https://github.com/cludden/app-container/commit/8735f10))
+* support "any!" and "all!" as module requirements ([5a34a33](https://github.com/cludden/app-container/commit/5a34a33))
+
+
+
 <a name="0.4.3"></a>
 ## [0.4.3](https://github.com/cludden/app-container/compare/v0.4.2...v0.4.3) (2017-04-11)
 
