@@ -22,6 +22,10 @@ describe('[all]', function () {
     .then((middleware) => {
       expect(middleware).to.be.an('object');
       expect(middleware).to.have.all.keys('middleware/a', 'middleware/b', 'middleware/c');
+    })
+    .then(() => container.load('routes/users'))
+    .then((users) => {
+      expect(users.getMiddleware()).to.be.an('object');
     });
   });
 });
