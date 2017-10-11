@@ -2,6 +2,16 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+<a name="0.4.8"></a>
+## [0.4.8](https://github.com/cludden/app-container/compare/v0.4.7...v0.4.8) (2017-10-11)
+
+
+### Bug Fixes
+
+* adds .babelrc to .npmignore to prevent dependency conflicts ([2e60118](https://github.com/cludden/app-container/commit/2e60118))
+
+
+
 <a name="0.4.7"></a>
 ## [0.4.7](https://github.com/cludden/app-container/compare/v0.4.6...v0.4.7) (2017-07-05)
 
