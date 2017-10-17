@@ -9,7 +9,7 @@ describe('[circular]', function () {
     const createContainer = () => {
       const container = new Container({ namespace: 'ioc' });
       container.glob('{a,b,c}.js', {
-        dir: path.join(__dirname, '../fixtures/circular'),
+        cwd: path.join(__dirname, '../fixtures/circular'),
       });
       return container;
     };
