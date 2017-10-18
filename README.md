@@ -210,6 +210,18 @@ export default function(bar, baz) {
     myMethod() { /* ... */ }
   });
 };
+
+// in bar.js
+export const inject = {
+  require: ['bar', 'baz']
+};
+
+export default async function(bar, baz) {
+  await new Promise(resolve => setTimeout(resolve, 1000))
+  return {
+    myMethod() { /* ... */ }
+  }
+};
 ```
 
 or, 2) by exposing an initialization method/function on the module instance that returns a promise.
@@ -236,20 +248,13 @@ export default function(bar, baz) {
 ## Module Properties
 A module declaration can declare any combination of the following properties.
 
-### init <small>String</small>
-The name of a method/function to call to initialize the module instance after it's been created.
-
-### name <small>String</small>
-A custom name to use to register with the container. If not provided, the relative path to the file (minus the extension) will be used instead when registering modules using glob
-
-### require <small>Object|String|String[]</small>
-Module dependencies.
-
-### singleton <small>Boolean</small>
-Whether or not the module should be treated as a singleton, meaning that if the module is required by two or more other modules, only one instance will ever be created, and all downstream modules will share the same instance.
-
-### type <small>String</small>
-The default export (or module.exports) should either be a factory function, constructor function or something like a plain old javascript object or function that doesn't need instantiation/initialization. If no type is declared, the container will inspect it and assume that it is a factory function (if a function is exported), or an object, if something else is exported. You can override the default behavior by declaring a type property with a value of `constructor` or `object`.
+| Property | Type | Description |
+| --- | --- | --- |
+| init | <small>String</small> | The name of a method/function to call to initialize the module instance after it's been created. |
+| name | <small>String</small> | A custom name to use to register with the container. If not provided, the relative path to the file (minus the extension) will be used instead when registering modules using glob |
+| require | <small>Object String String[]</small> | Module dependencies declarations |
+| singleton | <small>Boolean</small> | Whether or not the module should be treated as a singleton, meaning that if the module is required by two or more other modules, only one instance will ever be created, and all downstream modules will share the same instance. |
+| type | <small>String</small> | The default export (or module.exports) should either be a factory function, constructor function or something like a plain old javascript object or function that doesn't need instantiation/initialization. If no type is declared, the container will inspect it and assume that it is a factory function (if a function is exported), or an object, if something else is exported. You can override the default behavior by declaring a type property with a value of `constructor` or `object`. |
 
 
 
@@ -357,5 +362,6 @@ $ docker-compose run app-container
 
 
 ## LICENSE
-Copyright (c) 2017 Chris Ludden.  
+Copyright (c) 2017 Chris Ludden.
+
 Licensed under the [MIT License](LICENSE.md)
