@@ -15,7 +15,7 @@ describe('manual', function () {
     container.register(amod, 'a', amod.inject);
     container.register(bmod, 'b', bmod.inject);
     container.register(dmod, 'd', dmod.inject);
-    const [a, b, d] = await container.load('a', 'b', 'd');
+    const [a, b, d] = await container.load(['a', 'b', 'd']);
     expect(a).to.have.property('doSomething');
     expect(b).to.have.property('doSomethingElse');
     expect(d).to.have.property('bar');
