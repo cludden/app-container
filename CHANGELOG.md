@@ -2,6 +2,29 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+<a name="1.0.0-beta.0"></a>
+# [1.0.0-beta.0](https://github.com/cludden/app-container/compare/v0.4.8...v1.0.0-beta.0) (2017-10-18)
+
+
+### Bug Fixes
+
+* adds security check using nsp ([86d6177](https://github.com/cludden/app-container/commit/86d6177))
+* updates docker & compose files to allow for testing in docker environment ([bb4632a](https://github.com/cludden/app-container/commit/bb4632a))
+
+
+### Features
+
+* adds `register` method to container for manually registering components ([36463c0](https://github.com/cludden/app-container/commit/36463c0))
+* adds support for single array argument to container#load method ([b90a710](https://github.com/cludden/app-container/commit/b90a710))
+* changes glob options to be a direct passthrough to glob ([00e4df7](https://github.com/cludden/app-container/commit/00e4df7))
+
+
+### BREAKING CHANGES
+
+* removes "dir" requried option to glob
+
+
+
 <a name="0.4.8"></a>
 ## [0.4.8](https://github.com/cludden/app-container/compare/v0.4.7...v0.4.8) (2017-10-11)
 
