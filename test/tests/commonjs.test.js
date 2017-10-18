@@ -23,7 +23,7 @@ describe('[commonjs]', function () {
       defaults: { singleton: true },
     });
     container.glob('*.js', {
-      dir: path.join(__dirname, '../fixtures/commonjs'),
+      cwd: path.join(__dirname, '../fixtures/commonjs'),
     });
     const [a, b, c] = await container.load('aService', 'bService', 'cService');
     expect(a).to.have.property('foo').that.is.a('function');

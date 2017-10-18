@@ -11,7 +11,7 @@ describe('[all]', function () {
   it('should load {all!}', function () {
     const container = new Container(options);
     container.glob('**/*.js', {
-      dir: path.join(__dirname, '../fixtures/all'),
+      cwd: path.join(__dirname, '../fixtures/all'),
     });
     return container.load('all!.*/model')
     .then((models) => {
@@ -34,7 +34,7 @@ describe('[any]', function () {
   it('should load {any!}', async function () {
     const container = new Container(options);
     container.glob('**/*.js', {
-      dir: path.join(__dirname, '../fixtures/all'),
+      cwd: path.join(__dirname, '../fixtures/all'),
     });
     const models = await container.load('any!.*/model');
     expect(models).to.be.an('array').with.lengthOf(2);

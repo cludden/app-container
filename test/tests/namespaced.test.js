@@ -23,7 +23,7 @@ describe('[namespace]', function () {
       defaults: { singleton: true },
     });
     container.glob('*.js', {
-      dir: path.join(__dirname, '../fixtures/namespaced'),
+      cwd: path.join(__dirname, '../fixtures/namespaced'),
     });
     const a = await container.load('a');
     expect(a).to.have.property('doSomething').that.is.a('function');

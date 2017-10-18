@@ -6,10 +6,10 @@
   "scripts": {
     "build": "rm -rf dist/* && babel lib -d dist",
     "coverage": "./node_modules/.bin/babel-node ./node_modules/.bin/babel-istanbul cover ./node_modules/.bin/_mocha test/**/*.test.js",
-    "flow": "flow",
+    "lint": "eslint ./lib ./test",
     "postversion": "npm run build",
     "release": "npm run build && standard-version",
-    "start": "node .",
+    "sec": "nsp check",
     "test": "mocha --recursive --compilers js:babel-register test/**/*.test.js"
   },
   "repository": {
@@ -46,6 +46,7 @@
     "eslint-plugin-import": "^2.2.0",
     "istanbul": "^0.4.5",
     "mocha": "^3.2.0",
+    "nsp": "^2.8.1",
     "sinon": "^2.1.0",
     "sinon-chai": "^2.9.0",
     "standard-version": "^4.0.0"

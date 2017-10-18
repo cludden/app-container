@@ -12,7 +12,7 @@ describe('[basic]', function () {
   before(function () {
     this.container = new Container({ namespace: 'inject' });
     this.container.glob('**/*.js', {
-      dir: path.join(__dirname, '../fixtures/basic'),
+      cwd: path.join(__dirname, '../fixtures/basic'),
     });
     this.sandbox = sinon.sandbox.create();
   });
