@@ -2,6 +2,11 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+<a name="1.0.0"></a>
+# [1.0.0](https://github.com/cludden/app-container/compare/v1.0.0-beta.0...v1.0.0) (2017-11-03)
+
+
+
 <a name="1.0.0-beta.0"></a>
 # [1.0.0-beta.0](https://github.com/cludden/app-container/compare/v0.4.8...v1.0.0-beta.0) (2017-10-18)
 
