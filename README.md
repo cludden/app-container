@@ -16,7 +16,9 @@ $ npm install --save app-container
 ## Getting Started
 Below is a super simple example. See `/test/fixtures` for some more examples.
 
-Define some simple modules with dependencies.
+Define your code as modules that accept dependencies.
+
+using an asynchronous factory function...
 ```javascript
 // in config.js
 import someAsyncModule from 'some-async-module'
@@ -27,7 +29,10 @@ export default async function() {
   const config = await someAsyncModule.load()
   return config
 }
+```
 
+using a plain old javascript object...
+```javascript
 // in greet.js
 export const inject = {
   require: ['config']
@@ -38,24 +43,30 @@ export default {
     console.log(`${greeting}, ${name}${this.config.punctuation}`);
   },
 };
+```
 
+using a constructor function...
+```javascript
 // in hello.js
 export const inject = {
+  type: 'constructor',
   require: ['greet']
 }
 
-export default function foo(greet) {
-  return {
-    sayHello(name) {
-      greet.greet('Hello', name);
-    },
-  };
+export default class Foo {
+  constructor(greet) {
+    this.greeter = greet;
+  }
+
+  sayHello(name) {
+    this.greeter.greet('Hello', name);
+  }
 }
 ```
 
 Create a new container.
 ```javascript
-// in index.js
+// in container.js
 import Container from 'app-container';
 
 // create a new container
@@ -67,8 +78,22 @@ const container = new Container({
 // register modules matching a given pattern. the directory will be scanned recursively.
 container.glob('**/*.js', { cwd: __dirname });
 
-const hello = await container.load('hello')
-hello.sayHello('World');
+export default container;
+```
+
+Load some dependencies...
+```javascript
+// in index.js
+import container from './container';
+
+export default async function main() {
+  const hello = await container.load('hello');
+  hello.sayHello('World');
+}
+
+if (require.main === module) {
+  main();
+}
 ```
 
 
@@ -167,7 +192,11 @@ export default function({ some, other, mods }) {
 };
 ```
 
-Lastly, we can use special syntax to bulk load modules that match a pattern as an object.
+## Plugins
+
+We can use special syntax to use plugins that support additional functionality.
+
+The `all!` plugin can be used to bulk load modules that match a pattern as an object.
 ```javascript
 // in foo.js
 export const inject = {
@@ -181,7 +210,7 @@ export default function({ bar, baz }, { gar, gaz }) {
 };
 ```
 
-Or, as an array.
+The `any!` plugin is similar to *all*, except that it loads resolved modules as an array.
 ```javascript
 // in foo.js
 export const inject = {
@@ -195,6 +224,21 @@ export default function([bar, baz], [gar, gaz]) {
 };
 ```
 
+The `container!` plugin can be used to register/load dynamic components or change the behavior of the container at runtime.
+```javascript
+// in repository.js
+export const inject = {
+  require: ['container!', 'config']
+}
+
+export default function(container, config) {
+  if (config.backend === 'in-memory') {
+    return container.load('inmem/repo');
+  }
+  return container.load('redis/repo');
+}
+```
+
 
 
 ## Asynchronous Components
@@ -202,6 +246,7 @@ The container supports asynchronous modules in two ways. 1) By returning a promi
 ```javascript
 // in foo.js
 export const inject = {
+  name: 'foo',
   require: ['bar', 'baz']
 };
 
@@ -213,6 +258,7 @@ export default function(bar, baz) {
 
 // in bar.js
 export const inject = {
+  name: 'bar',
   require: ['bar', 'baz']
 };
 
@@ -228,6 +274,7 @@ or, 2) by exposing an initialization method/function on the module instance that
 ```javascript
 // in foo.js
 export const inject = {
+  name: 'foo',
   init: 'connect',
   require: ['bar', 'baz']
 };
@@ -313,10 +360,12 @@ Load one or more components
 ###### Example
 ```javascript
 // load a single module
-const foo = await container.load('foo')
+const foo = await container.load('foo');
 
 // load multiple modules
-const [foo, bar] = container.load('foo', 'bar')
+const [foo, bar] = await container.load('foo', 'bar');
+// or
+const [foo, bar] = await container.load(['foo', 'bar']);
 
 // the container returns a bluebird promise, so any bluebird function can be used.
 container.load('foo', 'bar')
@@ -325,12 +374,43 @@ container.load('foo', 'bar')
 });
 
 // use a component map
-const { foo, bar} = await container.load({ foo: 'services/foo', bar: 'services/bar' })
+const { foo, bar} = await container.load({ foo: 'services/foo', bar: 'services/bar' });
 
 // use all or any
-const { 'services/foo': foo, 'services/bar': bar } = await container.load('all!^services')
+const { 'services/foo': foo, 'services/bar': bar } = await container.load('all!^services');
 
-const [foo] = await container.load('any!^services')
+const services = await container.load('any!^services');
+```
+
+---
+
+### register(mod, name, [options]) => Bluebird
+Load one or more components
+
+###### Parameters
+| Name | Type | Description |
+| --- | --- | --- |
+| mod | *Function|Object* | module definition |
+| name | *Object|String* | component name or valid compoment options object |
+| [options] | *Object | component options object (see module properties above) |
+
+
+###### Example
+```javascript
+import Container from 'app-container';
+
+import * as bar from './bar';
+import * as foo from './foo';
+
+const container = new Container({
+  namespace: 'inject',
+  defaults: { singleton: true },
+});
+
+container.register(bar, 'bar', bar.inject);
+container.register(foo, foo.inject);
+
+export default container;
 ```
 
 
