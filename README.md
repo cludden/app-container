@@ -23,20 +23,20 @@ using an asynchronous factory function...
 // in config.js
 import someAsyncModule from 'some-async-module'
 
-export const inject = { }
+export const inject = { };
 
 export default async function() {
-  const config = await someAsyncModule.load()
-  return config
-}
+  const config = await someAsyncModule.load();
+  return config;
+};
 ```
 
 using a plain old javascript object...
 ```javascript
 // in greet.js
 export const inject = {
-  require: ['config']
-}
+  require: ['config'],
+};
 
 export default {
   greet(greeting, name) {
@@ -50,8 +50,8 @@ using a constructor function...
 // in hello.js
 export const inject = {
   type: 'constructor',
-  require: ['greet']
-}
+  require: ['greet'],
+};
 
 export default class Foo {
   constructor(greet) {
@@ -105,7 +105,7 @@ export const inject = { };
 
 export default function() {
   return {
-    myMethod() { /* ... */ }
+    myMethod() { /* ... */ },
   };
 };
 ```
@@ -115,14 +115,23 @@ Or, in commonjs format:
 // in foo.js
 module.exports = function() {
   return {
-    myMethod() { /* ... */ }
+    myMethod() { /* ... */ },
   };
 };
 
 module.exports.inject = { };
 ```
 
-If `foo.js` resides at the root of one of our registered directories, then the container would register a new component named `foo` with no dependencies and assume that `foo`'s default export (or module.exports) is a factory function. We could instead declare `foo` as a constructor function like so:
+If `foo.js` resides at the root of one of our registered directories, then the container would register a new component named `foo` with no dependencies and assume that `foo`'s default export (or module.exports) is a factory function. We can explicitly name the module defined in `foo.js` by including a `name` field in the exported module declaration:
+```javascript
+// in foo.js
+export const inject = {
+  name: 'customName',
+};
+// ...
+```
+
+We could instead declare `foo` as a constructor function like so:
 ```javascript
 // in foo.js
 export const inject = { type: 'constructor' };
@@ -138,7 +147,7 @@ Or even a plain old javascript object.
 export const inject = { };
 
 export default {
-  myMethod() { /* ... */ }
+  myMethod() { /* ... */ },
 };
 ```
 
@@ -146,12 +155,12 @@ To declare a dependency, we can add a `require` property to our declaration. In 
 ```javascript
 // in foo.js
 export const inject = {
-  require: 'bar'
+  require: 'bar',
 };
 
 export default function(bar) {
   return {
-    myMethod() { /* ... */ }
+    myMethod() { /* ... */ },
   };
 };
 ```
@@ -160,12 +169,12 @@ A component can have more than one dependency as well. By declaring `require` as
 ```javascript
 // in foo.js
 export const inject = {
-  require: ['bar', 'baz', 'gar', 'gaz']
+  require: ['bar', 'baz', 'gar', 'gaz'],
 };
 
 export default function(bar, baz, gar, gaz) {
   return {
-    myMethod() { /* ... */ }
+    myMethod() { /* ... */ },
   };
 };
 ```
@@ -179,15 +188,15 @@ export const inject = {
     other: 'baz',
     mods: {
       gar: 'gar',
-      gaz: 'gaz'
-    }
+      gaz: 'gaz',
+    },
   },
 };
 
 export default function({ some, other, mods }) {
   const { gar, gaz } = mods;
   return {
-    myMethod() { /* ... */ }
+    myMethod() { /* ... */ },
   };
 };
 ```
@@ -200,12 +209,12 @@ The `all!` plugin can be used to bulk load modules that match a pattern as an ob
 ```javascript
 // in foo.js
 export const inject = {
-  require: ['all!^b', 'all!^g']
+  require: ['all!^b', 'all!^g'],
 };
 
 export default function({ bar, baz }, { gar, gaz }) {
   return {
-    myMethod() { /* ... */ }
+    myMethod() { /* ... */ },
   };
 };
 ```
@@ -214,12 +223,12 @@ The `any!` plugin is similar to *all*, except that it loads resolved modules as 
 ```javascript
 // in foo.js
 export const inject = {
-  require: ['any!^b', 'any!^g']
+  require: ['any!^b', 'any!^g'],
 };
 
 export default function([bar, baz], [gar, gaz]) {
   return {
-    myMethod() { /* ... */ }
+    myMethod() { /* ... */ },
   };
 };
 ```
@@ -228,7 +237,7 @@ The `container!` plugin can be used to register/load dynamic components or chang
 ```javascript
 // in repository.js
 export const inject = {
-  require: ['container!', 'config']
+  require: ['container!', 'config'],
 }
 
 export default function(container, config) {
@@ -247,47 +256,46 @@ The container supports asynchronous modules in two ways. 1) By returning a promi
 // in foo.js
 export const inject = {
   name: 'foo',
-  require: ['bar', 'baz']
+  require: ['bar', 'baz'],
 };
 
 export default function(bar, baz) {
   return Promise.resolve({
-    myMethod() { /* ... */ }
+    myMethod() { /* ... */ },
   });
 };
 
 // in bar.js
 export const inject = {
   name: 'bar',
-  require: ['bar', 'baz']
+  require: ['gar', 'gaz'],
 };
 
-export default async function(bar, baz) {
-  await new Promise(resolve => setTimeout(resolve, 1000))
+export default async function(gar, gaz) {
+  await new Promise(resolve => setTimeout(resolve, 1000));
   return {
-    myMethod() { /* ... */ }
+    myMethod() { /* ... */ },
   }
 };
 ```
 
 or, 2) by exposing an initialization method/function on the module instance that returns a promise.
-```javascript
-// in foo.js
+```typescript
+// in foo.ts
 export const inject = {
   name: 'foo',
+  type: 'constructor',
   init: 'connect',
-  require: ['bar', 'baz']
+  require: ['bar', 'baz'],
 };
 
-export default function(bar, baz) {
-  return {
-    myMethod() { /* ... */ },
-
-    connect() {
-      return Promise.resolve();
-    },
-  };
-};
+export default class Foo {
+  constructor(private bar: Bar, private baz: Baz) { }
+  
+  async connect() {
+    await this.bar.doSomethingAsync();
+  }
+}
 ```
 
 
@@ -385,7 +393,7 @@ const services = await container.load('any!^services');
 ---
 
 ### register(mod, name, [options]) => Bluebird
-Load one or more components
+Manually registers a component/module with the container
 
 ###### Parameters
 | Name | Type | Description |
@@ -438,6 +446,13 @@ $ docker-compose run app-container
 1. Push to the branch (`git push origin my-new-feature`)
 1. Ensure linting/security/tests are all passing
 1. Create new Pull Request
+
+
+
+## Todo
+- [ ] examples
+  - [ ] express/koa
+  - [ ] lambda w/ webpack
 
 
 
