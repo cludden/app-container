@@ -2,6 +2,16 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+<a name="1.1.1"></a>
+## [1.1.1](https://github.com/cludden/app-container/compare/v1.1.0...v1.1.1) (2018-05-08)
+
+
+### Bug Fixes
+
+* fixes `Unknown Component` error that occurred when loading multiple plugins where one or more have no matches ([157812b](https://github.com/cludden/app-container/commit/157812b)), closes [#9](https://github.com/cludden/app-container/issues/9)
+
+
+
 <a name="1.1.0"></a>
 # [1.1.0](https://github.com/cludden/app-container/compare/v1.1.0-beta.0...v1.1.0) (2018-04-03)
 
