@@ -47,6 +47,19 @@ describe('[plugins]', function () {
     });
   });
 
+  describe('[any! any!]', function () {
+    it('should load multiple plugins', async function () {
+      const container = new Container(options);
+      container.glob('**/*.js', {
+        cwd: path.join(__dirname, '../fixtures/all'),
+      });
+      const app = await container.load('app');
+      expect(app).to.have.property('services').that.is.an('array').with.lengthOf(0);
+      expect(app).to.have.property('routes').that.is.an('array').with.lengthOf(1);
+      expect(app).to.have.property('middleware').that.is.an('array').with.lengthOf(3);
+    });
+  });
+
   describe('[container!]', function () {
     it('should load {container!}', async function () {
       // define new container
