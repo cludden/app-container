@@ -1,4 +1,7 @@
 dist
+.babel.json
+.config
+.v8flags
 
 # Logs
 logs

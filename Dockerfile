@@ -1,11 +1,11 @@
-FROM node:6
+FROM node:10
 
 RUN useradd --user-group --create-home --shell /bin/false app
 
 ENV HOME=/home/app
 WORKDIR $HOME/src
 
-COPY package.json npm-shrinkwrap.json $HOME/src/
+COPY package.json package-lock.json $HOME/src/
 RUN chown -R app:app $HOME/*
 USER app
 RUN npm install

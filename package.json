@@ -5,12 +5,11 @@
   "main": "./dist",
   "scripts": {
     "build": "rm -rf dist/* && babel lib -d dist",
-    "coverage": "./node_modules/.bin/babel-node ./node_modules/.bin/babel-istanbul cover ./node_modules/.bin/_mocha test/**/*.test.js",
+    "coverage": "node_modules/.bin/nyc --require babel-core/register node_modules/.bin/mocha --recursive --exit 'test/**/*.test.js'",
     "lint": "eslint ./lib ./test",
     "postversion": "npm run build",
     "release": "npm run build && standard-version",
-    "sec": "nsp check",
-    "test": "mocha --recursive --compilers js:babel-register test/**/*.test.js"
+    "test": "mocha --recursive --compilers js:babel-register --exit 'test/**/*.test.js'"
   },
   "repository": {
     "type": "git",
@@ -32,31 +31,39 @@
     "url": "https://github.com/cludden/app-container/issues"
   },
   "homepage": "https://github.com/cludden/app-container#readme",
-  "devDependencies": {
-    "babel-cli": "^6.23.0",
-    "babel-core": "^6.23.1",
-    "babel-eslint": "^7.2.1",
-    "babel-istanbul": "^0.12.2",
-    "babel-plugin-add-module-exports": "^0.2.1",
-    "babel-plugin-transform-object-rest-spread": "^6.23.0",
-    "babel-preset-env": "^1.2.1",
-    "chai": "^3.5.0",
-    "eslint": "^3.17.1",
-    "eslint-config-airbnb-base": "^11.1.1",
-    "eslint-plugin-import": "^2.2.0",
-    "istanbul": "^0.4.5",
-    "mocha": "^3.2.0",
-    "nsp": "^2.8.1",
-    "sinon": "^2.1.0",
-    "sinon-chai": "^2.9.0",
-    "standard-version": "^4.0.0"
+  "nyc": {
+    "check-coverage": true,
+    "lines": 80,
+    "reporter": [
+      "lcov",
+      "text-summary"
+    ],
+    "temp-directory": "./coverage/.nyc_output"
   },
   "dependencies": {
-    "bluebird": "^3.5.0",
-    "debug": "^2.6.3",
-    "dependency-graph": "^0.5.0",
-    "es6-error": "^4.0.2",
-    "glob": "^7.1.1",
-    "lodash": "^4.17.4"
+    "bluebird": "^3.5.4",
+    "debug": "^4.1.1",
+    "dependency-graph": "^0.8.0",
+    "es6-error": "^4.1.1",
+    "glob": "^7.1.4",
+    "lodash": "^4.17.11"
+  },
+  "devDependencies": {
+    "babel-cli": "^6.26.0",
+    "babel-core": "^6.26.3",
+    "babel-eslint": "^10.0.1",
+    "babel-plugin-add-module-exports": "^1.0.2",
+    "babel-plugin-transform-object-rest-spread": "^6.26.0",
+    "babel-preset-env": "^1.7.0",
+    "chai": "^4.2.0",
+    "eslint": "^5.16.0",
+    "eslint-config-airbnb-base": "^13.1.0",
+    "eslint-plugin-import": "^2.17.2",
+    "istanbul": "^0.4.5",
+    "mocha": "^6.1.4",
+    "nyc": "^14.1.1",
+    "sinon": "^7.3.2",
+    "sinon-chai": "^3.3.0",
+    "standard-version": "^6.0.1"
   }
 }

@@ -1,5 +1,7 @@
 import chai, { expect } from 'chai';
-import { afterEach, before, describe, it } from 'mocha';
+import {
+  afterEach, before, describe, it,
+} from 'mocha';
 import path from 'path';
 import sinon from 'sinon';
 import sinonchai from 'sinon-chai';
@@ -10,7 +12,7 @@ chai.use(sinonchai);
 
 describe('[namespace]', function () {
   before(function () {
-    this.sandbox = sinon.sandbox.create();
+    this.sandbox = sinon.createSandbox();
   });
 
   afterEach(function () {
