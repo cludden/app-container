@@ -1,6 +1,16 @@
-# Change Log
+# Changelog
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
+
+### [1.1.2](https://github.com/cludden/app-container/compare/v1.1.1...v1.1.2) (2019-05-30)
+
+
+### Bug Fixes
+
+* **security:** updates dependencies ([1e1d836](https://github.com/cludden/app-container/commit/1e1d836))
+* minor linting fixes ([9ad2e48](https://github.com/cludden/app-container/commit/9ad2e48))
+
+
 
 <a name="1.1.1"></a>
 ## [1.1.1](https://github.com/cludden/app-container/compare/v1.1.0...v1.1.1) (2018-05-08)

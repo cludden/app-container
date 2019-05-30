@@ -1,6 +1,6 @@
 {
   "name": "app-container",
-  "version": "1.1.1",
+  "version": "1.1.2",
   "description": "asynchronous IoC container for node.js applications",
   "main": "./dist",
   "scripts": {
