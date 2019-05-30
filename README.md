@@ -247,22 +247,9 @@ The container supports asynchronous modules in two ways. 1) By returning a promi
 // in foo.js
 export const inject = {
   name: 'foo',
-  require: ['bar', 'baz']
 };
 
-export default function(bar, baz) {
-  return Promise.resolve({
-    myMethod() { /* ... */ }
-  });
-};
-
-// in bar.js
-export const inject = {
-  name: 'bar',
-  require: ['bar', 'baz']
-};
-
-export default async function(bar, baz) {
+export default async function() {
   await new Promise(resolve => setTimeout(resolve, 1000))
   return {
     myMethod() { /* ... */ }
@@ -276,14 +263,13 @@ or, 2) by exposing an initialization method/function on the module instance that
 export const inject = {
   name: 'foo',
   init: 'connect',
-  require: ['bar', 'baz']
 };
 
-export default function(bar, baz) {
+export default function() {
   return {
     myMethod() { /* ... */ },
 
-    connect() {
+    async connect() {
       return Promise.resolve();
     },
   };
@@ -295,13 +281,13 @@ export default function(bar, baz) {
 ## Module Properties
 A module declaration can declare any combination of the following properties.
 
-| Property | Type | Description |
-| --- | --- | --- |
-| init | <small>String</small> | The name of a method/function to call to initialize the module instance after it's been created. |
-| name | <small>String</small> | A custom name to use to register with the container. If not provided, the relative path to the file (minus the extension) will be used instead when registering modules using glob |
-| require | <small>Object String String[]</small> | Module dependencies declarations |
-| singleton | <small>Boolean</small> | Whether or not the module should be treated as a singleton, meaning that if the module is required by two or more other modules, only one instance will ever be created, and all downstream modules will share the same instance. |
-| type | <small>String</small> | The default export (or module.exports) should either be a factory function, constructor function or something like a plain old javascript object or function that doesn't need instantiation/initialization. If no type is declared, the container will inspect it and assume that it is a factory function (if a function is exported), or an object, if something else is exported. You can override the default behavior by declaring a type property with a value of `constructor` or `object`. |
+| Property  | Type                                  | Description                                                                                                                                                                                                                                                                                                                                                                                                                                                                                         |
+| --------- | ------------------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| init      | <small>String</small>                 | The name of a method/function to call to initialize the module instance after it's been created.                                                                                                                                                                                                                                                                                                                                                                                                    |
+| name      | <small>String</small>                 | A custom name to use to register with the container. If not provided, the relative path to the file (minus the extension) will be used instead when registering modules using glob                                                                                                                                                                                                                                                                                                                  |
+| require   | <small>Object String String[]</small> | Module dependencies declarations                                                                                                                                                                                                                                                                                                                                                                                                                                                                    |
+| singleton | <small>Boolean</small>                | Whether or not the module should be treated as a singleton, meaning that if the module is required by two or more other modules, only one instance will ever be created, and all downstream modules will share the same instance.                                                                                                                                                                                                                                                                   |
+| type      | <small>String</small>                 | The default export (or module.exports) should either be a factory function, constructor function or something like a plain old javascript object or function that doesn't need instantiation/initialization. If no type is declared, the container will inspect it and assume that it is a factory function (if a function is exported), or an object, if something else is exported. You can override the default behavior by declaring a type property with a value of `constructor` or `object`. |
 
 
 
@@ -310,11 +296,11 @@ A module declaration can declare any combination of the following properties.
 Constructor function for creating container instances.
 
 ###### Parameters
-| Name | Type | Description |
-| --- | --- | --- |
-| options | *Object* | |
-| options.defaults | *Object* | a map of default module options to apply to each module declaration |
-| options.namespace | *String* | override the default namespace `inject` |
+| Name              | Type     | Description                                                         |
+| ----------------- | -------- | ------------------------------------------------------------------- |
+| options           | *Object* |                                                                     |
+| options.defaults  | *Object* | a map of default module options to apply to each module declaration |
+| options.namespace | *String* | override the default namespace `inject`                             |
 
 ###### Example
 ```javascript
@@ -334,10 +320,10 @@ const container = new Container({
 The glob method allows for automagically registering multiple modules with the container instance using `glob` to match files in a given directory.
 
 ###### Parameters
-| Name | Type | Description |
-| --- | --- | --- |
+| Name    | Type     | Description                                                                                                                                                   |
+| ------- | -------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------- |
 | pattern | *String* | a glob pattern for matching modules to register with the container. Only modules that match this pattern and declare a matching namespace will be registered. |
-| options | *Object* | an options object to pass to the underlying `glob.sync` call. |
+| options | *Object* | an options object to pass to the underlying `glob.sync` call.                                                                                                 |
 
 ###### Example
 ```javascript
@@ -353,9 +339,9 @@ container.glob('**/*.js', { cwd: __dirname, ignore: ['index.js'] })
 Load one or more components
 
 ###### Parameters
-| Name | Type | Description |
-| --- | --- | --- |
-| component | *Object|String* | one or more components to load |
+| Name      | Type    | Description |
+| --------- | ------- | ----------- |
+| component | *Object | String*     | one or more components to load |
 
 ###### Example
 ```javascript
@@ -388,11 +374,11 @@ const services = await container.load('any!^services');
 Load one or more components
 
 ###### Parameters
-| Name | Type | Description |
-| --- | --- | --- |
-| mod | *Function|Object* | module definition |
-| name | *Object|String* | component name or valid compoment options object |
-| [options] | *Object | component options object (see module properties above) |
+| Name      | Type      | Description                                            |
+| --------- | --------- | ------------------------------------------------------ |
+| mod       | *Function | Object*                                                | module definition                                |
+| name      | *Object   | String*                                                | component name or valid compoment options object |
+| [options] | *Object   | component options object (see module properties above) |
 
 
 ###### Example
@@ -442,6 +428,6 @@ $ docker-compose run app-container
 
 
 ## LICENSE
-Copyright (c) 2017 Chris Ludden.
+Copyright (c) 2019 Chris Ludden.
 
 Licensed under the [MIT License](LICENSE.md)
