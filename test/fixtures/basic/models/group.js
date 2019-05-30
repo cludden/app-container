@@ -8,9 +8,9 @@ export default class Group {
 
   create({ users }) {
     return Bluebird.each(users, user => this.userModel.create(user))
-    .then(() => {
-      this.models.push({ users });
-    });
+      .then(() => {
+        this.models.push({ users });
+      });
   }
 }
 

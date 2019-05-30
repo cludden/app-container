@@ -3,6 +3,7 @@ export default class User {
   constructor() {
     this.models = [];
   }
+
   create(user) {
     return new Promise((resolve) => {
       setTimeout(() => {
